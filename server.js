@@ -1,4 +1,4 @@
-const https = require('https')
+const http = require('http')
 const fs = require('fs')
 const args = require('minimist')(process.argv.slice())
 args['port']
@@ -12,13 +12,13 @@ fs.readFile('./www/index.html', 'utf8', (err, data) => {
         process.exit(1)
     }
 
-    const server = https.createServer((req, res) => {
+    const server = http.createServer((req, res) => {
         res.statusCode = 200
         res.setHeader('Content-Type', 'text/html')
         res.end(data)
     })
 
     server.listen(port, () => {
-        console.log('Server running at port ${port}')
+        console.log('Server listening at port ${port}')
     })
 })
